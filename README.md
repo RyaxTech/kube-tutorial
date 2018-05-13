@@ -117,7 +117,6 @@ You can retreve the result of the execution through the command that gives the l
     
     $kubectl logs spark-pi-driver3 -n default  
 
-
 ##Activate an advanced scheduling policy and test its usage
 
 Clone the repo:
@@ -164,7 +163,6 @@ Connect on one of the nodes and activate `cpu-manager-policy` parameter on kubel
 Launch a job and see how cgroups are set in a way to allow exclusive reservation of the job on the allocated CPU.
 
     $kubectl create -f ~/heat-scheduler/deployments/podpi.yaml
-
 
 ##Enable and use Pod Autoscaling
 
