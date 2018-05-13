@@ -119,7 +119,9 @@ While the job is running you can connect from another terminal and follow the ex
 Note that the driver launches the executors and each one of them is launched on a different node
 You can retreve the result of the execution through the command that gives the logs of the pod:
     
-    $kubectl logs spark-pi-driver3 -n default  
+    $kubectl logs spark-pi-driver3 -n default
+
+For more details and configuration parameters you can look here https://kubernetes.io/blog/2018/03/apache-spark-23-with-native-kubernetes/ and https://spark.apache.org/docs/latest/running-on-kubernetes.html.
 
 ## 4. Activate an advanced scheduling policy and test its usage
 
@@ -184,9 +186,13 @@ From another terminal connect on one of the compute nodes of your Kubernetes clu
     $sudo systemctl daemon-reload
     $sudo systemctl start kubelet
 
-Launch a job and see how cgroups are set in a way to allow exclusive reservation of the job on the allocated CPU.
+Go back on the open terminal for NODE1 and launch a job that provides an integer number for resources:limits:cpu. You can submit the previously used pod after changing the name as done before:
 
     $kubectl create -f ~/heat-scheduler/deployments/podpi.yaml
+
+From the other terminal connect on the reconfigured compute node, see if the pod has been launched there and see how cgroups are set in such a way to allow exclusive reservation of the pod on the demanded number of CPUs. Searching in `/sys/fs/cgroup/cpuset/kubepods/` of the node to find the specific pod along with the different values that have been set.
+
+For more details you can read the specific [section](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/) of the official documentation. 
 
 ## 6. Enable and use Pod Autoscaling
 
