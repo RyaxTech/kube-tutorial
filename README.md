@@ -82,7 +82,7 @@ Find out the exposed port where dashboard is running, named DASHBOARD_PORT for s
 
 Access Dashboard from your local browser through the link - "http://NODE1_IP:DASHBOARD_PORT".
 
-###Prometheus monitoring with Grafana
+### Prometheus monitoring with Grafana
 
     $git clone https://github.com/RyaxTech/prometheus-operator.git
     $cd prometheus-operator/contrib/kube-prometheus/
@@ -117,7 +117,7 @@ You can retreve the result of the execution through the command that gives the l
     
     $kubectl logs spark-pi-driver3 -n default  
 
-##Activate an advanced scheduling policy and test its usage
+## Activate an advanced scheduling policy and test its usage
 
 Clone the repo:
 
@@ -149,7 +149,7 @@ Check on which node it is executed by following the logs of the scheduler:
 
     $kubectl logs
 
-##Activate and use Exclusive CPU allocation policy
+## Activate and use Exclusive CPU allocation policy
 
 Connect on one of the nodes and activate `cpu-manager-policy` parameter on kubelet
 
@@ -164,7 +164,7 @@ Launch a job and see how cgroups are set in a way to allow exclusive reservation
 
     $kubectl create -f ~/heat-scheduler/deployments/podpi.yaml
 
-##Enable and use Pod Autoscaling
+## Enable and use Pod Autoscaling
 
     $cd ~/
     $export GOROOT=/usr/lib/go-1.10
