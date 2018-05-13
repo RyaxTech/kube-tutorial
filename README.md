@@ -8,7 +8,7 @@ This tutorial provides a fast training on selected features of Kubernetes orches
 - [Parallel SSH](https://code.google.com/archive/p/parallel-ssh/) installed for the configuration script
   
 
-## Deploy the AWS VMs to host our Kubernetes cluster
+## 1. Deploy the AWS VMs to host our Kubernetes cluster
 
 We will be using the tools provided by another widely used Kubernetes training platform which we have adapted to our needs.
 
@@ -54,7 +54,7 @@ You can stop the VMs and deployment at any time using the following command:
 
     $ ./workshopctl stop $TAG
 
-## Activate the Dashboard with Heapster and Prometheus monitoring with Grafana on your Kubernetes cluster
+## 2. Activate the Dashboard with Heapster and Prometheus monitoring with Grafana on your Kubernetes cluster
 
 From now on all the commands that are mentioned have to be executed on NODE1 of your AWS deployment (which will be the master of your Kubernetes cluster) except if another node is mentioned explicitly.
 
@@ -100,7 +100,7 @@ Find out the exposed port where dashboard is running, named GRAFANA_PORT for sim
 
 Access Grafana from your local browser through the link - "http://NODE1_IP:GRAFANA_PORT".
 
-## Execute Big Data job with Spark on the Kubernetes Cluster
+## 3. Execute Big Data job with Spark on the Kubernetes Cluster
 
 Retrieve the API-server IP address:
     
@@ -121,7 +121,7 @@ You can retreve the result of the execution through the command that gives the l
     
     $kubectl logs spark-pi-driver3 -n default  
 
-## Activate an advanced scheduling policy and test its usage
+## 4. Activate an advanced scheduling policy and test its usage
 
 We test a particular scheduling policy that considers the temperature of the nodes and performs the placement on the node with the lowest temperature. We test the policy explained and provided by Nerdalize. More details on this [presentation](https://schd.ws/hosted_files/kccnceu18/4e/KubeCon%202018%20-%20Advanced%20Scheduling%20for%20Heating%20Shows.pdf). 
 
@@ -173,7 +173,7 @@ Follow the scheduling decision by getting the logs of the scheduler extender as 
 
     $kubectl logs heat-scheduler-SPECIFIC-HASH -n kube-system -c extender
 
-## Activate and use Exclusive CPU Management
+## 5. Activate and use Exclusive CPU Management
 
 From another terminal connect on one of the compute nodes of your Kubernetes cluster and activate `cpu-manager-policy` parameter on kubelet.
 
@@ -188,7 +188,7 @@ Launch a job and see how cgroups are set in a way to allow exclusive reservation
 
     $kubectl create -f ~/heat-scheduler/deployments/podpi.yaml
 
-## Enable and use Pod Autoscaling
+## 6. Enable and use Pod Autoscaling
 
 This exercise will provide the necessary steps to configurie HPA v2 for Kubernetes, use it and observe its behaviour. The following commands allow us ot install the Metrics Server add-on that supplies the core metrics and use a demo app to showcase pod autoscaling based on CPU and memory usage.
 
