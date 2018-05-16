@@ -1,4 +1,4 @@
-# Kubernetes Orchestration Engine Training
+# Kubernetes Training
 This tutorial provides a fast training on selected features of Kubernetes orchestration engine. It allows users to deploy a Kubernetes cluster upon AWS using their account and provides the necessary steps to discover basic and advanced functionalities of Kubernetes. It goes through the activation and usage of features such as dashboard, monitoring, advanced scheduling, execution of Big Data jobs with Spark, cpu management and pod auto-scaling.
 
 ## Prerequisites
@@ -53,6 +53,21 @@ The last one will be the master of your Kubernetes cluster, named NODE1_IP for s
 You can stop the VMs and deployment at any time using the following command:
 
     $ ./workshopctl stop $TAG
+
+## 1bis. Alternative deployment option with vagrant locally
+
+In case the usage of AWS is not possible you can deploy kubernetes cluster with Vagrant locally or on a remote private server with the following procedure. However, the process will take more time to deploy, it needs at least 8GB of RAM (for 1 master and 2 nodes) and not all the exercises will work correctly.
+
+    $ git clone https://github.com/c9s/vagrant-kubeadm.git
+
+Ideally you should change the Vagrantfile to write NUM_NODES=3 but if you have memory issues you can keep the default which is 2. Once the deployment finishes you need to ssh on the master node and do the following:
+    
+    $ mkdir /home/vagrant/.kube
+    $ sudo cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+    $ sudo chown vagrant:vagrant /home/vagrant/.kube/config
+    $ export KUBECONFIG=/home/vagrant/.kube/config
+
+After that you will be able to use kubectl command and start the exercises that follow.
 
 ## 2. Activate the Dashboard with Heapster and Prometheus monitoring with Grafana on your Kubernetes cluster
 
@@ -235,7 +250,15 @@ The autoscaler doesn't react immediately to usage spikes. By default the metrics
 
 The procedure is explained in detail and with more examples here: https://www.weave.works/blog/kubernetes-horizontal-pod-autoscaler-and-prometheus
 
+## 7. Teardown the AWS deployment
 
+You can stop the VMs and deployment at any time using the following command:
 
+    $ ./workshopctl stop $TAG
 
+You need to exit the ssh to the VM before you launch the command. 
+
+#### Important Note
+
+Don't forget to teardown the AWS deployment if you don't need it anymore. Remember you are using t2.medium VMs which have a certain cost (around 2 Euros if you keep them running for 8 hours).
 
