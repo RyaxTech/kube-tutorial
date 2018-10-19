@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: pod-
+spec:
+  containers:
+  - name: pi
+    image: perl
+    command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(1000)"]
+  restartPolicy: Never
+
